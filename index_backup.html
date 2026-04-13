@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About the Author</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #0f0c29;
+      background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Anime style background lights */
+    .light-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: 0;
+      animation: float 10s infinite ease-in-out alternate;
+    }
+    .orb-1 { width: 300px; height: 300px; background: rgba(0, 255, 255, 0.4); top: 10%; left: 15%; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: rgba(255, 0, 255, 0.3); bottom: 10%; right: 10%; animation-delay: -3s; }
+    .orb-3 { width: 200px; height: 200px; background: rgba(255, 255, 0, 0.3); top: 40%; left: 60%; animation-delay: -6s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.1); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    /* Sakura Petals */
+    .sakura {
+      position: absolute;
+      background-color: #ffb7c5;
+      border-radius: 15px 0 15px 0;
+      opacity: 0.8;
+      box-shadow: 0 0 10px #ffb7c5, 0 0 20px #ff00ff;
+      animation: fall linear infinite, sway ease-in-out infinite alternate;
+      z-index: 0;
+    }
+    @keyframes fall {
+      0% { top: -10%; }
+      100% { top: 110%; }
+    }
+    @keyframes sway {
+      0% { transform: translateX(0) rotate(0deg); }
+      100% { transform: translateX(50px) rotate(45deg); }
+    }
+    .s1 { left: 10%; width: 14px; height: 14px; animation-duration: 8s, 3s; }
+    .s2 { left: 30%; width: 20px; height: 20px; animation-duration: 12s, 4s; animation-delay: 2s, 0s; }
+    .s3 { left: 50%; width: 12px; height: 12px; animation-duration: 9s, 2s; animation-delay: 4s, 1s; }
+    .s4 { left: 75%; width: 18px; height: 18px; animation-duration: 10s, 3.5s; animation-delay: 1s, 2s; }
+    .s5 { left: 90%; width: 16px; height: 16px; animation-duration: 11s, 4.5s; animation-delay: 3s, 0.5s; }
+
+    /* Moving Synthwave Grid */
+    .grid-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: -50%;
+      background: 
+        linear-gradient(rgba(0, 255, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.15) 1px, transparent 1px);
+      background-size: 50px 50px;
+      transform: perspective(600px) rotateX(60deg);
+      transform-origin: bottom center;
+      animation: gridMove 3s linear infinite;
+      z-index: 0;
+      opacity: 0.5;
+    }
+    @keyframes gridMove {
+      0% { transform: perspective(600px) rotateX(60deg) translateY(0); }
+      100% { transform: perspective(600px) rotateX(60deg) translateY(50px); }
+    }
+
+    .author-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      max-width: 600px;
+      width: 100%;
+      padding: 40px 30px;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+      /* 3D Hover properties */
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+    }
+    .author-card > * {
+      transform: translateZ(30px);
+    }
+    img.profile-pic {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+    h1 {
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+      font-size: 2.2rem;
+      letter-spacing: 1px;
+    }
+    p {
+      line-height: 1.7;
+      margin-bottom: 15px;
+      color: #e2e8f0;
+      font-size: 1.05rem;
+    }
+    p strong {
+      color: #00ffff;
+      text-shadow: 0 0 5px rgba(0,255,255,0.4);
+    }
+    .links {
+      margin-top: 25px;
+    }
+    .links a {
+      display: inline-block;
+      margin: 8px 10px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .links a:hover {
+      background: rgba(0, 255, 255, 0.2);
+      border-color: #00ffff;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      transform: translateY(-2px);
+    }
+    .back {
+      margin-top: 35px;
+      display: inline-block;
+      text-decoration: none;
+      color: #ff00ff;
+      font-weight: bold;
+      transition: all 0.3s;
+      text-shadow: 0 0 5px rgba(255,0,255,0.5);
+    }
+    .back:hover {
+      color: #fff;
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    }
+
+    /* Custom Cursor / Hover Glow Effects */
+    body {
+      cursor: crosshair; /* Hacker/Cyberpunk feel */
+    }
+    .cursor-glow {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(0, 255, 255, 0.4) 0%, transparent 65%);
+      border-radius: 50%;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <div id="cursorGlow" class="cursor-glow"></div>
+  <div class="grid-overlay"></div>
+  <div class="sakura s1"></div>
+  <div class="sakura s2"></div>
+  <div class="sakura s3"></div>
+  <div class="sakura s4"></div>
+  <div class="sakura s5"></div>
+  <div class="light-orb orb-1"></div>
+  <div class="light-orb orb-2"></div>
+  <div class="light-orb orb-3"></div>
+  <div class="author-card">
+    <img class="profile-pic" src="..\images\hero.jpg">
+    <h1>About Me</h1>
+    <p>Hi! I am <strong>Bobby M. Dubb</strong> from Putik, Zamboanga City. I previously studied at Ateneo de Zamboanga University. My hobbies include reading comics and manga, biking, riding my motorcycle, playing badminton, gaming, and watching series such as K-dramas and other shows.</p>
+    <p>I have a strong interest in <strong>engineering, science, and space</strong>.</p>
+    <p>I created this website to share knowledge about bridges and engineering and to help others understand their importance in our daily lives. My goal is to graduate and become a registered civil engineer. I also aspire to travel the world.</p>
+    <p><strong>Motto:</strong> "konting bato konting semento MONUMENTO"</p>
+    <div class="links">
+      <a href="https://www.facebook.com/share/1A4EgfMPVi/" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/_batutengz?igsh=cDFwbDl2OG8zMHpk" target="_blank">Instagram</a>
+      <a href="mailto:bobbymdubb17@gmail.com">Email</a>
+    </div>
+    <a href="index.html" class="back">&larr; Back to Home</a>
+  </div>
+
+  <script>
+    const cursorGlow = document.getElementById('cursorGlow');
+    const authorCard = document.querySelector('.author-card');
+
+    document.addEventListener('mousemove', (e) => {
+      // Move neon glow to cursor position
+      cursorGlow.style.opacity = '1';
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
+
+      // Advanced 3D pop-out parallax tilt on the card
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      
+      // Calculate angular distance to tilt toward the cursor
+      // (Dampened by a factor so it rotates smoothly instead of snapping)
+      const rotateY = (e.clientX - centerX) / 35;
+      const rotateX = -(e.clientY - centerY) / 35;
+      
+      // Apply 3D perspective tilt
+      authorCard.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    document.addEventListener('mouseleave', () => {
+      // Glow and card reset when mouse leaves the page
+      cursorGlow.style.opacity = '0';
+      authorCard.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg)`;
+    });
+  </script>
+</body>
+</html>
